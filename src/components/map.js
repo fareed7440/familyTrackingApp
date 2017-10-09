@@ -4,7 +4,7 @@ import MapView from 'react-native-maps';
 import RNGooglePlaces from 'react-native-google-places';
 import flagBlueImg from '../images/add.png'
 import flagPinkImg from '../images/add.png'
-import { Container, Header, Content, Button, Text, Card, CardItem, Body, Icon,Left,Right,Title } from 'native-base';
+import { Container, Header, Content, Button, Text, Card, CardItem, Body, Icon, Left, Right, Title } from 'native-base';
 
 import {
   AppRegistry,
@@ -34,8 +34,8 @@ export default class Maps extends Component {
         mapSnapshot: null,
         takeSnapshot: {},
         region: {
-          latitude: 24.8615,
-          longitude: 67.0099,
+          latitude: 0,
+          longitude:0,
           latitudeDelta: 0.06,
           longitudeDelta: 0.06,
           Address: null
@@ -63,7 +63,7 @@ export default class Maps extends Component {
             longitude: place.longitude,
             latitudeDelta: 0.06,
             longitudeDelta: 0.06,
-          
+
           }
         })
 
@@ -72,10 +72,10 @@ export default class Maps extends Component {
   }
 
   componentDidMount() {
-   
+    console.log('component')
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('postion',position)
+        console.log('postion', position)
 
         this.setState({
           region: {
@@ -105,12 +105,7 @@ export default class Maps extends Component {
 
     return (
       <Container style={styles.container}>
-           <Button iconLeft
-             style={styles.btn}
-             >
-            <Icon onPress={Actions.createCircleCon()} style={{color :'red'}} name='add' />
-            <Text style={{color:'black'}}>Create circle</Text>
-          </Button>
+
 
         <MapView style={styles.map}
           ref={ref => { this.map = ref; }}
@@ -141,34 +136,44 @@ export default class Maps extends Component {
 
           onRegionChange={this.onRegionChange}
         >
+          <MapView.Marker
+            coordinate={this.state.region}
+            title={"title"}
+          >
+          </MapView.Marker>
 
-       
+
         </MapView>
+        {/* <Button iconLeft
+             style={styles.btn}
+             >
+            <Icon onPress={Actions.createCircleCon()} style={{color :'red'}} name='add' />
+            <Text style={{color:'black'}}>Create circle</Text>
+          </Button> */}
 
-
-         <Button style={{marginBottom:80,marginLeft:270}}
-            rounded light>
-            <Icon style={{color:'blue'}} name='add'/>
-         </Button>
+        <Button style={{ marginBottom: 80, marginLeft: 270 }}
+          rounded light>
+          <Icon style={{ color: 'blue' }} name='add' />
+        </Button>
 
         <TouchableOpacity
           style={styles.button}
 
         >
-          <Button style={{alignContent:'center'}}
-          onPress={() => this.openSearchModal()}
+          <Button style={{ alignContent: 'center' }}
+            onPress={() => this.openSearchModal()}
             rounded light>
-            <Icon name='search'/>
+            <Icon name='search' />
             <Text>search Places</Text>
-        
+
           </Button>
         </TouchableOpacity>
 
-      
-          <Text>Latitude: {latitude}</Text>
-          <Text>Longitude: {longitude}</Text>
 
-          {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
+        <Text>Latitude: {latitude}</Text>
+        <Text>Longitude: {longitude}</Text>
+
+        {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
 
         {/*<Button style={{ marginLeft: 140, backgroundColor: 'transparent' }}
           onPress={this.onLogout}
@@ -192,8 +197,8 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-      height: window.height * 0.6,
-  marginTop:100
+    height: window.height * 0.6,
+    marginTop: 100
 
 
   },
@@ -205,24 +210,24 @@ const styles = StyleSheet.create({
   crd: {
     marginTop: -300,
     marginLeft: -30
-  },  header: {
-         width: window.width * 1,
-         marginTop:-80
-         //backgroundColor:'cyan'
-       // height: window.height * 0.9,
+  }, header: {
+    width: window.width * 1,
+    marginTop: -80
+    //backgroundColor:'cyan'
+    // height: window.height * 0.9,
 
-    },
-    card:{
-    height:60,
-    flex:0,
-    backgroundColor:'transparent'
+  },
+  card: {
+    height: 60,
+    flex: 0,
+    backgroundColor: 'transparent'
 
-    },btn:{
-      marginBottom:240,
-      width:370,
-      backgroundColor:'transparent',
-      flexDirection:'row'
-     // fontColor: 'black'
-    }
+  }, btn: {
+    marginBottom: 240,
+    width: 370,
+    backgroundColor: 'transparent',
+    flexDirection: 'row'
+    // fontColor: 'black'
+  }
 });
 

@@ -11,14 +11,14 @@ class Login extends Component {
             password: '',
         }
 
-        this.handleForm = this.handleForm.bind(this)
+       this.handleForm = this.handleForm.bind(this)
         this.handleInput = this.handleInput.bind(this)
 
 
     }
 
 
-    handleInput = (e) => {
+    handleInput  (e)  {
         this.setState({
             value: e.target.value
         })

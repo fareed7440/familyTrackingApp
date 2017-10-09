@@ -11,7 +11,8 @@ class Routing extends Component{
         return(
  <Router > 
 
-<Scene key = "logoutCon">
+<Scene key = "home">
+      <Scene key="home" component={Home} hideNavBar = {true} />
       <Scene key="logoutCon" component={MapsCon} hideNavBar = {false} title ='family' />
       <Scene key="home" component={Home} hideNavBar = {true} />
        <Scene key="createCircleCon" component={CreateCircleCon} hideNavBar = {true} />
