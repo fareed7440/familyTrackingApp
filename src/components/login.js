@@ -48,10 +48,7 @@ class Login extends Component {
                 style={styles.container}>
                 <Content>
                     <Header style={styles.hdr} >
-                        <Left
-
-
-                        >
+                        <Left>
                             <Button transparent>
                                 <Icon name="ios-arrow-back"
                                     onPress={() => Actions.signupCon()}

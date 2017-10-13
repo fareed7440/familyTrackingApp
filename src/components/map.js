@@ -4,8 +4,9 @@ import MapView from 'react-native-maps';
 import RNGooglePlaces from 'react-native-google-places';
 import flagBlueImg from '../images/add.png'
 import flagPinkImg from '../images/add.png'
-import { Container, Header, Content, Button, Text, Card, CardItem, Body, Icon, Left, Right, Title } from 'native-base';
-
+import { Container, Header, Content, Button, Text, Body, Icon, Left, Right, Title,Tab, Tabs  } from 'native-base';
+import {Card} from './card'
+import {CardSection} from './cardSection'
 import {
   AppRegistry,
   StyleSheet, Dimensions,
@@ -28,18 +29,21 @@ export default class Maps extends Component {
 
     this.state =
       {
-        marker1: true,
+       // marker1: true,
         SPACE: 0.01,
         error: null,
         mapSnapshot: null,
         takeSnapshot: {},
         region: {
-          latitude: 0,
-          longitude:0,
+          latitude:24.946218,
+          longitude:67.005615,
           latitudeDelta: 0.06,
           longitudeDelta: 0.06,
-          Address: null
-        },
+          Address: null,
+          name : '',
+          address:'',
+
+                },
 
 
 
@@ -59,8 +63,10 @@ export default class Maps extends Component {
         console.log('place', place)
         this.setState({
           region: {
-            latitude: place.latitude,
+            latitude: place.latitude, 
             longitude: place.longitude,
+            name: place.name,
+            address :place.address,
             latitudeDelta: 0.06,
             longitudeDelta: 0.06,
 
@@ -102,6 +108,8 @@ export default class Maps extends Component {
 
     const { latitude } = this.state.region
     const { longitude } = this.state.region
+     const { name } = this.state.region
+      const { address } = this.state.region
 
     return (
       <Container style={styles.container}>
@@ -111,26 +119,7 @@ export default class Maps extends Component {
           ref={ref => { this.map = ref; }}
           provider="google"
           showsUserLocation={true}
-          showsMyLocationButton={true}
-          showsCompass={true}
-          followsUserLocation={true}
-          loadingEnabled={true}
-          toolbarEnabled={true}
-          zoomEnabled={true}
-          rotateEnabled={true}
-          cameraPosition={{ auto: true, zoom: 10 }}
-          scrollGestures={true}
-          zoomGestures={true}
-          tiltGestures={true}
-          rotateGestures={true}
-          consumesGesturesInView={true}
-          showsBuildings={true}
-          showsTraffic={true}
-          showsIndoors={true}
-          compassButton={true}
-          myLocationButton={true}
-          indoorPicker={true}
-          allowScrollGesturesDuringRotateOrZoom={true}
+         
 
           region={this.state.region}
 
@@ -144,16 +133,14 @@ export default class Maps extends Component {
 
 
         </MapView>
-        {/* <Button iconLeft
-             style={styles.btn}
-             >
-            <Icon onPress={Actions.createCircleCon()} style={{color :'red'}} name='add' />
-            <Text style={{color:'black'}}>Create circle</Text>
-          </Button> */}
-
-        <Button style={{ marginBottom: 80, marginLeft: 270 }}
+       
+          <Button 
+          onPress={() => Actions.createCircleCon()}
+          style={{ marginBottom: 320, marginLeft: 30,width:300,height:60 }}
           rounded light>
-          <Icon style={{ color: 'blue' }} name='add' />
+          <Icon style={{ color: 'red' }} name='add' />
+           <Text>Create Circle</Text>
+
         </Button>
 
         <TouchableOpacity
@@ -172,6 +159,8 @@ export default class Maps extends Component {
 
         <Text>Latitude: {latitude}</Text>
         <Text>Longitude: {longitude}</Text>
+        <Text>name: {name}</Text>
+        <Text>address: {address}</Text>
 
         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
 
@@ -197,8 +186,13 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-    height: window.height * 0.6,
-    marginTop: 100
+        top: 100,
+      //  left: 0,
+       // right: 0,
+      //  bottom: 0,
+      //  flex: 1,
+      //  width: '100%',
+        height: window*0.8,
 
 
   },
@@ -218,9 +212,10 @@ const styles = StyleSheet.create({
 
   },
   card: {
-    height: 60,
-    flex: 0,
-    backgroundColor: 'transparent'
+    height: 120,
+    marginTop: -200,
+    flex: 1,
+    
 
   }, btn: {
     marginBottom: 240,

@@ -5,7 +5,7 @@ import * as DB from '../../firebase/database'
 function createCircleRequest(data) {
     console.log('datataa', data)
     return dispatch => {
-        dispatch(LoginRequest());
+        dispatch(CreateCircleRequest());
         return DB.database.ref('Circle/').push(data).then(function(err,result){
             if(err){
                 throw (err)

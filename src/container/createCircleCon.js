@@ -1,4 +1,4 @@
-import CreateCircle from '../components/login'
+import CreateCircle from '../components/createCircle'
 import { connect } from 'react-redux'
 import createCircleRequest from '../store/actions/createCircleAct'
 function mapStateToProps(state) {

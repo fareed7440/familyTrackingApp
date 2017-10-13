@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Form, Item, Input, Label, Body, Button, Left, Title, Right, Icon } from 'native-base';
+import { Container, Header, Content, Form, Item, Input, Label, Body, Button, Left, Title, Right, Icon, Tab, Tabs } from 'native-base';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Card } from './card'
+import { CardSection } from './cardSection'
+import ViewCircle from './viewCircle'
+import SendCode from './codeView.'
 class CreateCircle extends Component {
+    titleStyle
     constructor(props) {
         super(props)
         this.state = {
             name: '',
             id: '',
-            CircleName : '',
-             
+            CircleName: '',
+
 
 
 
@@ -39,58 +44,57 @@ class CreateCircle extends Component {
 
     render() {
         return (
-            <Image
-                source={require('../images/1.png')}
-                style={styles.container}>
+            <Container>
                 <Content>
-                    <Header style={styles.hdr} >
-                        <Left
 
 
-                        >
-                            <Button transparent>
-                                <Icon name="ios-arrow-back"
-                                    onPress={() => Actions.home()}
+                    <Tabs initialPage={1}>
 
-                                />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Circle Info </Title>
-                        </Body>
-                        <Right />
-                    </Header>
-                    <Form onSubmit={this.handleForm}>
-                        <Item floatingLabel>
-                            <Label>name</Label>
-                            <Input
-                                style={styles.inpt}
-                                value={this.state.value}
-                                onChangeText={(name) => this.setState({ name })}
-                            />
-                        </Item>
+                        <Tab heading="Send Code">
+                           <SendCode/>
 
-                        <Item floatingLabel>
-                            <Label>id</Label>
-                            <Input
+                        </Tab>
+                        <Tab heading="Circle">
+                             <View><Text style={{ alignSelf: 'center', fontSize: 20, color: '#1eb3cd' }}>Enter Your Circle Name</Text></View>
 
-                                style={styles.inpt}
-                                value={this.state.value}
-                                onChangeText={(id) => this.setState({ id })}
+                            <Form onSubmit={this.handleForm}>
+                                <Item floatingLabel>
+                                    <Label>Enter circle Name</Label>
+                                    <Input
+                                        style={styles.inpt}
+                                        value={this.state.value}
+                                        onChangeText={(name) => this.setState({ name })}
+                                    />
+                                </Item>
 
-                            />
-                        </Item>
-                        <Button
-                            type='submit'
-                            onPress={this.handleForm}
-                            style={styles.btn} full success>
-                            <Text>sign up</Text>
-                        </Button>
-                    </Form>
+                                <Item floatingLabel>
+                                    <Label> Enter Circle id</Label>
+                                    <Input
+
+                                        style={styles.inpt}
+                                        value={this.state.value}
+                                        onChangeText={(id) => this.setState({ id })}
+
+                                    />
+                                </Item>
+                                <Button
+                                    type='submit'
+                                    onPress={this.handleForm}
+                                    style={styles.btn} rounded light>
+                                    <Text style={{ marginLeft: 90 , color : 'white'}}>CREATE</Text>
+                                </Button>
+                            </Form>
+                         
+                        </Tab>
+                        <Tab heading="View Circle">
+                            <ViewCircle />
+                        </Tab>
+                    </Tabs>
+
 
 
                 </Content>
-            </Image>
+            </Container>
         )
     }
 }
@@ -112,7 +116,9 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 30,
         marginLeft: 22,
-        backgroundColor: '#1eb3cd',
+        backgroundColor: '#F43092',
+        
+        //alignItems : 'center'
     },
     inpt: {
         width: 200,
